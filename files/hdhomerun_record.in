@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# $FreeBSD$
+#
+# PROVIDE: hdhomerun_record
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add these lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# hdhomerun_record_enable (bool):	Set to NO by default.
+#					Set it to YES to enable doormand.
+# hdhomerun_config (path):	Set to /etc/hdhomerun.conf
+#				by default.
+
+. /etc/rc.subr
+
+name=hdhomerun_record
+desc="HDHomeRun DVR Recording Engine"
+rcvar=hdhomerun_record_enable
+
+load_rc_config $name
+: ${hdhomerun_record_enable:=NO}
+: ${hdhomerun_config=/etc/hdhomerun.conf}
+
+start_cmd="%%PREFIX%%/bin/${name} start --pidfile $pidfile --conf $hdhomerun_config"
+stop_cmd="%%PREFIX%%/bin/${name} stop"
+
+pidfile=/var/run/${name}.pid
+
+${name}_user=hdhomerun
+${name}_group=hdhomerun
+
+required_files=$hdhomerun_config
+
+
+run_rc_command "$1"
