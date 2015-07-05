@@ -24,7 +24,7 @@ IA32_BINARY_PORT=	yes
 NO_WRKSUBDIR=	yes
 NO_BUILD=       yes
 
-USE_RC_SUBR=	hdhomerun_record
+USE_RC_SUBR=	hdhomerun_recorder
 
 USERS=	hdhomerun
 GROUPS=	hdhomerun
@@ -34,7 +34,8 @@ post-extract:
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/${DISTNAME} \
-		${STAGEDIR}${PREFIX}/bin/${PKGNAMEPREFIX}${PORTNAME}
+		${STAGEDIR}${PREFIX}/bin/hdhomerun_recorder
 	${INSTALL_DATA} ${FILESDIR}/hdhomerun.conf ${STAGEDIR}${PREFIX}/etc/hdhomerun.conf.sample
+	${MKDIR} ${STAGEDIR}/var/run/hdhomerun
 
 .include <bsd.port.mk>

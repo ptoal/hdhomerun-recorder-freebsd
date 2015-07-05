@@ -1,2 +1,3 @@
-bin/hdhomerun-recorder
+bin/hdhomerun_recorder
 etc/hdhomerun.conf.sample
+@dir(hdhomerun,hdhomerun,775) /var/run/hdhomerun
